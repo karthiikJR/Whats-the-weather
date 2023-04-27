@@ -1,10 +1,12 @@
 package com.example.whatstheweather;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -103,6 +105,10 @@ public class MainActivity extends AppCompatActivity {
         String url = "https://api.weatherapi.com/v1/current.json?key=ba7dc74132f548b28e4114756232604&q="+usrInp+"&aqi=no";
         Task t = new Task();
         t.execute(url);
+
+        // When user clicks on the button we need to get rid of the keyboard after user clicks on it
+        InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(searchBar.getWindowToken(),0);
     }
 
     // AsyncTask class to execute in background (Getting data from the web)
